@@ -5,6 +5,10 @@
   border-bottom: 1px solid;
 }
 
+.none {
+  display: none !important;
+}
+
 .task {
   text-align: center;
   border: 2px solid #888;
@@ -13,13 +17,16 @@
   font-family: roboto;
   overflow: hidden;
   padding: 1rem 2rem;
-  margin: 10px 0;
+  margin: 10px 0 !important;
   width: 90% !important;
   position: relative;
   text-decoration: none;
   transition: 0.2s transform ease-in-out;
   will-change: transform;
   z-index: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .task::after {
   background-color: #888;

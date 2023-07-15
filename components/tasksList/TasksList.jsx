@@ -17,6 +17,8 @@ import { Backdrop, Checkbox, CircularProgress, Grid } from "@mui/material";
 import { Msg, logStatus, Dark } from "@/helper/Contexts";
 
 import styles from "./TasksList.module.css";
+import NewTaskDialog from "./NewTaskDialog";
+import { ReactSortable } from "react-sortablejs";
 
 export default function TasksList() {
   const route = useRouter();
@@ -27,6 +29,7 @@ export default function TasksList() {
 
   const [tasksList, setTasksList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [counter, setCounter] = useState(1);
 
   useEffect(() => {
     //Check If user logged in
@@ -35,32 +38,37 @@ export default function TasksList() {
       route.push("/");
     } else {
       //Get tasks list from server
-      getDocs(collection(db, "tasks"))
-        .then((data) => {
-          const list = data.docs.filter(
-            (doc) => doc.data().uid == auth.currentUser.uid
-          );
-
-          const dataList = list.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          }));
-          //sort list based on creation time
-          dataList.sort((a, b) => b.order - a.order);
-          setLoading(false);
-          setTasksList(dataList);
-        })
-        .catch((err) => {
-          setLoading(false);
-          route.push("/");
-          setMsg({
-            open: true,
-            message: err.message,
-            type: "error",
-          });
-        });
+      getList();
     }
   }, [loggedIn]);
+
+  const getList = () => {
+    if (!loading) setLoading(true);
+    getDocs(collection(db, "tasks"))
+      .then((data) => {
+        const list = data.docs.filter(
+          (doc) => doc.data().uid == auth.currentUser.uid
+        );
+
+        const dataList = list.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        //sort list based on creation time
+        dataList.sort((a, b) => a.order - b.order);
+        setLoading(false);
+        setTasksList(dataList);
+      })
+      .catch((err) => {
+        setLoading(false);
+        route.push("/");
+        setMsg({
+          open: true,
+          message: err.message,
+          type: "error",
+        });
+      });
+  };
 
   const checked = (task) => {
     setLoading(true);
@@ -97,7 +105,7 @@ export default function TasksList() {
 
   const deleteTask = (id) => {
     setLoading(true);
-    const taskDoc = doc(db, "task", id);
+    const taskDoc = doc(db, "tasks", id);
 
     deleteDoc(taskDoc)
       .then(() => {
@@ -122,13 +130,37 @@ export default function TasksList() {
       });
   };
 
-  const done = tasksList.filter((task) => task.done);
-  const progress = tasksList.filter((task) => !task.done);
+  const reOrder = (newList) => {
+    newList.map((task, index) => {
+      const taskRef = doc(db, "tasks", task.id);
+      const newTask = task;
+      task.order = index;
+      updateDoc(taskRef, { ...newTask });
+    });
+    setTasksList(
+      newList.map((task, index) => {
+        return {
+          ...task,
+          order: index,
+        };
+      })
+    );
+  };
 
+  const done = tasksList.filter((task) => task.done);
+  const maxOrder = tasksList.length
+    ? Math.max(...tasksList.map((task) => task.order)) + 1
+    : 0;
+  console.log(maxOrder);
   return (
     <div className={`container ${darkMode ? "darkShadow" : "lightShadow"}`}>
       <div className="header">
         <h1>Tasks List</h1>
+        <NewTaskDialog
+          max={maxOrder}
+          getList={getList}
+          setLoading={setLoading}
+        />
         <div onClick={route.back} className="backBtn">
           Back
         </div>
@@ -154,23 +186,28 @@ export default function TasksList() {
           <Grid item xs={12} className={styles.colTitle}>
             In Progress Tasks
           </Grid>
-          {progress.map((task) => (
-            <Grid
-              key={task.id}
-              item
-              xs={12}
-              container
-              justifyContent="space-between"
-              alignItems="center"
-              className={`${styles.task} ${!darkMode && styles.lightTask}`}
-            >
-              {task.title}
-              <Checkbox
-                onChange={() => checked(task)}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-            </Grid>
-          ))}
+          <ReactSortable
+            style={{ width: "100%" }}
+            list={tasksList}
+            setList={reOrder}
+          >
+            {tasksList.map((task) => {
+              return (
+                <div
+                  className={`${styles.task} ${!darkMode && styles.lightTask} ${
+                    task.done && styles.none
+                  }`}
+                  key={task.id}
+                >
+                  {task.title}
+                  <Checkbox
+                    onChange={() => checked(task)}
+                    inputProps={{ "aria-label": "controlled" }}
+                  />
+                </div>
+              );
+            })}
+          </ReactSortable>
         </Grid>
         <Grid
           item
@@ -193,13 +230,14 @@ export default function TasksList() {
               container
               justifyContent="space-between"
               alignItems="center"
-              xs={12}
-              className={`${styles.task} ${!darkMode && styles.lighttask}`}
+              className={`${styles.task} ${!darkMode && styles.lightTask}`}
             >
               {task.title}
-              <Checkbox checked inputProps={{ "aria-label": "controlled" }} />
-              <div onClick={() => deleteTask(task.id)} className="backBtn">
-                Delete
+              <div className="center">
+                <Checkbox checked inputProps={{ "aria-label": "controlled" }} />
+                <div onClick={() => deleteTask(task.id)} className="backBtn">
+                  Delete
+                </div>
               </div>
             </Grid>
           ))}
