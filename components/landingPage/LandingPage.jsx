@@ -12,7 +12,7 @@ export default function LandingPage() {
       <h1>
         Manage All Your Tasks
         <br />
-        Within a Blink
+        Like a Freak!
       </h1>
       <div className={styles.btnContainer}>
         {!loggedIn && (

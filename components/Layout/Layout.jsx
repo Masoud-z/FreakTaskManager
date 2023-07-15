@@ -67,16 +67,16 @@ export default function Layout({ children }) {
         } `}
       >
         <Link href="/" className={styles.logo}>
-          Tournament Bracket Generator
+          Freak Task Manager
         </Link>
 
         {loggedIn && (
           <nav className={styles.linksContainer}>
             <Link className={styles.navLink} href="/new">
-              Create new Tournament
+              Create new Task
             </Link>
             <Link className={styles.navLink} href="/list">
-              Tournaments List
+              Tasks List
             </Link>
           </nav>
         )}
