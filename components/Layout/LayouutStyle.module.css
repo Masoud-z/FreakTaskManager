@@ -130,6 +130,10 @@
   background-color: #fff;
 }
 
+.navLink:hover {
+  color: #ffd700;
+}
+
 .navLink:hover:before {
   opacity: 1;
 }

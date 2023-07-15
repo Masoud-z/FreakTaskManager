@@ -72,9 +72,6 @@ export default function Layout({ children }) {
 
         {loggedIn && (
           <nav className={styles.linksContainer}>
-            <Link className={styles.navLink} href="/new">
-              Create new Task
-            </Link>
             <Link className={styles.navLink} href="/list">
               Tasks List
             </Link>
