@@ -30,7 +30,9 @@ export default function TasksList() {
 
   const [tasksList, setTasksList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [counter, setCounter] = useState(1);
+  const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const tasksCollectionRef = collection(db, "tasks");
 
   useEffect(() => {
     //Check If user logged in
@@ -148,20 +150,58 @@ export default function TasksList() {
     );
   };
 
+  const createNewTask = () => {
+    if (title) {
+      setOpen(false);
+      setLoading(true);
+      addDoc(tasksCollectionRef, {
+        title: title,
+        order: maxOrder,
+        uid: auth.currentUser.uid,
+        done: false,
+      })
+        .then(() => {
+          setMsg({
+            open: true,
+            message: "New task added!",
+            type: "success",
+          });
+          getList();
+        })
+        .catch((err) => {
+          setLoading(false);
+          setMsg({
+            open: true,
+            message: err.message,
+            type: "error",
+          });
+        });
+      setTitle("");
+    } else {
+      setMsg({
+        open: true,
+        message: "Title should not be empty",
+        type: "error",
+      });
+    }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const done = tasksList.filter((task) => task.done);
   const maxOrder = tasksList.length
     ? Math.max(...tasksList.map((task) => task.order)) + 1
     : 0;
-  console.log(maxOrder);
   return (
     <div className={`container ${darkMode ? "darkShadow" : "lightShadow"}`}>
       <div className="header">
         <h1>Tasks List</h1>
-        <NewTaskDialog
-          max={maxOrder}
-          getList={getList}
-          setLoading={setLoading}
-        />
+        <div className="backBtn" onClick={() => setOpen(true)}>
+          Create New Task
+        </div>
+
         <div onClick={route.back} className="backBtn">
           Back
         </div>
@@ -250,6 +290,25 @@ export default function TasksList() {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Create New Task</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="title"
+            label="Title"
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={createNewTask}>Create</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
