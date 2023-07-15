@@ -3,7 +3,7 @@ import TasksList from "@/components/tasksList/TasksList";
 function taskList() {
   return (
     <>
-      <TasksList />{" "}
+      <TasksList />
     </>
   );
 }
