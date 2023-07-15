@@ -1,5 +1,7 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
+import { Dark, Msg, logStatus } from "@/helper/Contexts";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signOut, onAuthStateChanged } from "firebase/auth";
@@ -14,15 +16,14 @@ import {
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 
-import { Dark, Msg, logStatus } from "@/helper/Contexts";
 import styles from "./LayouutStyle.module.css";
 import { auth } from "@/config/firebase";
 
 export default function Layout({ children }) {
   const router = useRouter();
-  const { loggedIn, setLoggedIn } = useContext(logStatus);
-  const { darkMode, setDarkMode } = useContext(Dark);
-  const { msg, setMsg } = useContext(Msg);
+  const [darkMode, setDarkMode] = useState(true);
+  const [msg, setMsg] = useState({ open: false, message: "", type: "" });
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const [openLoading, setOpenLoading] = useState(true);
 
@@ -58,68 +59,82 @@ export default function Layout({ children }) {
   }, []);
 
   return (
-    <div
-      className={`${styles.container} ${darkMode ? styles.dark : styles.light}`}
-    >
-      <header
-        className={`${styles.header} ${
-          darkMode ? styles.darkHeader : styles.lightHeader
-        } `}
-      >
-        <Link href="/" className={styles.logo}>
-          Freak Task Manager
-        </Link>
-
-        {loggedIn && (
-          <nav className={styles.linksContainer}>
-            <Link className={styles.navLink} href="/list">
-              Tasks List
-            </Link>
-          </nav>
-        )}
-
-        <div className={styles.linksContainer}>
-          {loggedIn && (
-            <span className={styles.signOut} onClick={logOut}>
-              Sign Out
-            </span>
-          )}
+    <logStatus.Provider value={{ loggedIn, setLoggedIn }}>
+      <Msg.Provider value={{ msg, setMsg }}>
+        <Dark.Provider value={{ darkMode, setDarkMode }}>
           <div
-            className={styles.darkMode}
-            onClick={() => setDarkMode((perv) => !perv)}
+            className={`${styles.container} ${
+              darkMode ? styles.dark : styles.light
+            }`}
           >
-            {darkMode ? <DarkModeIcon /> : <DarkModeOutlinedIcon />}
+            <header
+              className={`${styles.header} ${
+                darkMode ? styles.darkHeader : styles.lightHeader
+              } `}
+            >
+              <Link href="/" className={styles.logo}>
+                Freak Task Manager
+              </Link>
+
+              {loggedIn && (
+                <nav className={styles.linksContainer}>
+                  <Link className={styles.navLink} href="/list">
+                    Tasks List
+                  </Link>
+                </nav>
+              )}
+
+              <div className={styles.linksContainer}>
+                {loggedIn && (
+                  <span className={styles.signOut} onClick={logOut}>
+                    Sign Out
+                  </span>
+                )}
+                <div
+                  className={styles.darkMode}
+                  onClick={() => setDarkMode((perv) => !perv)}
+                >
+                  {darkMode ? <DarkModeIcon /> : <DarkModeOutlinedIcon />}
+                </div>
+              </div>
+            </header>
+            <main>{children}</main>
+            {/* Showing message to the user */}
+            <Snackbar
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              TransitionComponent={(props) => (
+                <Slide {...props} direction="left" />
+              )}
+              open={msg.open}
+              autoHideDuration={3000}
+              onClose={(event, reason) => {
+                if (reason !== "clickaway") {
+                  setMsg({ open: false, message: "", type: "" });
+                }
+              }}
+              key="left"
+            >
+              <Alert
+                variant="filled"
+                severity={msg.type}
+                sx={{ width: "100%" }}
+              >
+                {msg.message}
+              </Alert>
+            </Snackbar>
+            {/* Showing loading bar while getting data about user status from server */}
+            <Backdrop
+              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open={openLoading}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
           </div>
-        </div>
-      </header>
-      <main>{children}</main>
-      {/* Showing message to the user */}
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        TransitionComponent={(props) => <Slide {...props} direction="left" />}
-        open={msg.open}
-        autoHideDuration={3000}
-        onClose={(event, reason) => {
-          if (reason !== "clickaway") {
-            setMsg({ open: false, message: "", type: "" });
-          }
-        }}
-        key="left"
-      >
-        <Alert variant="filled" severity={msg.type} sx={{ width: "100%" }}>
-          {msg.message}
-        </Alert>
-      </Snackbar>
-      {/* Showing loading bar while getting data about user status from server */}
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={openLoading}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-    </div>
+        </Dark.Provider>
+      </Msg.Provider>
+    </logStatus.Provider>
   );
 }
