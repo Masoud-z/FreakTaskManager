@@ -12,7 +12,7 @@ import PasswordIcon from "@mui/icons-material/Password";
 import { auth, googleProvider } from "@/config/firebase";
 
 import styles from "./SignInStyle.module.css";
-import { Msg, logStatus } from "@/helper/Contexts";
+import { Msg, logStatus } from "@/components/helper/Contexts";
 
 export default function SignIn() {
   const route = useRouter();

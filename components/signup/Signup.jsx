@@ -13,7 +13,7 @@ import PasswordIcon from "@mui/icons-material/Password";
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 import { auth, googleProvider } from "@/config/firebase";
-import { Msg, logStatus } from "@/helper/Contexts";
+import { Msg, logStatus } from "@/components/helper/Contexts";
 
 import styles from "./SignupStyle.module.css";
 

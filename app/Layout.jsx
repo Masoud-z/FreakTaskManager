@@ -2,7 +2,7 @@
 import "@/styles/global.css";
 import { useEffect, useState } from "react";
 
-import { Dark, Msg, logStatus } from "@/helper/Contexts";
+import { Dark, Msg, logStatus } from "@/components/helper/Contexts";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signOut, onAuthStateChanged } from "firebase/auth";

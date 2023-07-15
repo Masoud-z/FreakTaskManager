@@ -13,7 +13,7 @@ import {
 import { auth, db } from "@/config/firebase";
 import { collection, addDoc } from "firebase/firestore";
 
-import { Msg } from "@/helper/Contexts";
+import { Msg } from "@/components/helper/Contexts";
 
 export default function NewTaskDialog({ max, getList, setLoading }) {
   const { setMsg } = useContext(Msg);

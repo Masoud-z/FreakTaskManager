@@ -3,7 +3,7 @@ import { useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./LandingPageStyle.module.css";
-import { logStatus } from "@/helper/Contexts";
+import { logStatus } from "@/components/helper/Contexts";
 
 export default function LandingPage() {
   const { loggedIn } = useContext(logStatus);

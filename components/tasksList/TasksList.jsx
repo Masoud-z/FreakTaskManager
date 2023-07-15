@@ -16,7 +16,7 @@ import { Backdrop, Checkbox, CircularProgress, Grid } from "@mui/material";
 
 import { ReactSortable } from "react-sortablejs";
 
-import { Msg, logStatus, Dark } from "@/helper/Contexts";
+import { Msg, logStatus, Dark } from "@/components/helper/Contexts";
 
 import styles from "./TasksList.module.css";
 import NewTaskDialog from "./NewTaskDialog";
