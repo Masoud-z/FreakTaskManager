@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import "@/styles/global.css";
 import { Dark, Msg, logStatus } from "@/helper/Contexts";
@@ -23,9 +24,7 @@ function layout({ children }) {
         <logStatus.Provider value={{ loggedIn, setLoggedIn }}>
           <Msg.Provider value={{ msg, setMsg }}>
             <Dark.Provider value={{ darkMode, setDarkMode }}>
-              <Layout>
-                <Layout>{children}</Layout>
-              </Layout>
+              <Layout>{children}</Layout>
             </Dark.Provider>
           </Msg.Provider>
         </logStatus.Provider>
