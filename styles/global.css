@@ -14,14 +14,14 @@ html {
 }
 
 /* Change the color of text, border and size of Material UI Buttons */
-.LayouutStyle_dark___hyrn .MuiOutlinedInput-notchedOutline,
-.LayouutStyle_dark___hyrn .MuiButtonBase-root {
+.LayouutStyle_dark__HGS_i .MuiOutlinedInput-notchedOutline,
+.LayouutStyle_dark__HGS_i .MuiButtonBase-root {
   color: white;
   border-color: #f1f1f1;
 }
 
-.LayouutStyle_light__haqMN .MuiOutlinedInput-notchedOutline,
-.LayouutStyle_light__haqMN .MuiButtonBase-root {
+.LayouutStyle_light__Jr8pz .MuiOutlinedInput-notchedOutline,
+.LayouutStyle_light__Jr8pz .MuiButtonBase-root {
   border-color: #222;
   color: #222;
 }
@@ -38,11 +38,11 @@ html {
 /* ----------------------++++---------------------- */
 
 /* Change the color of label of TextFields of Material UI */
-.LayouutStyle_dark___hyrn .MuiFormLabel-root {
+.LayouutStyle_dark__HGS_i .MuiFormLabel-root {
   color: white;
 }
 
-.LayouutStyle_light__haqMN .MuiFormLabel-root {
+.LayouutStyle_light__Jr8pz .MuiFormLabel-root {
   color: black;
 }
 
@@ -58,13 +58,13 @@ html {
 /* ----------------------++++---------------------- */
 
 /* Change the color of icons of Material UI */
-.LayouutStyle_dark___hyrn .MuiSvgIcon-root,
-.LayouutStyle_dark___hyrn .MuiInputBase-input {
+.LayouutStyle_dark__HGS_i .MuiSvgIcon-root,
+.LayouutStyle_dark__HGS_i .MuiInputBase-input {
   color: white;
 }
 
-.LayouutStyle_light__haqMN .MuiSvgIcon-root,
-.LayouutStyle_light__haqMN .MuiInputBase-input {
+.LayouutStyle_light__Jr8pz .MuiSvgIcon-root,
+.LayouutStyle_light__Jr8pz .MuiInputBase-input {
   color: black;
 }
 /* ----------------------++++---------------------- */
