@@ -30,7 +30,7 @@ export const metadata = {
   },
 };
 
-function layout({ children }) {
+function RootLayout({ children }) {
   const router = useRouter();
   const [darkMode, setDarkMode] = useState(true);
   const [msg, setMsg] = useState({ open: false, message: "", type: "" });
@@ -156,4 +156,4 @@ function layout({ children }) {
   );
 }
 
-export default layout;
+export default RootLayout;
