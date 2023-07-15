@@ -1,10 +1,11 @@
+import LandingPage from "@/components/landingPage/LandingPage";
 
 function Home() {
   return (
-    <div>
-    
-    </div>
-  )
+    <>
+      <LandingPage />
+    </>
+  );
 }
 
-export default Home
+export default Home;
