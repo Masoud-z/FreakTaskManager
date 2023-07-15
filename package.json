@@ -18,6 +18,8 @@
     "next": "13.4.10",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "styled-components": "^5.3.11"
+    "styled-components": "^5.3.11",
+    "firebase": "^9.23.0",
+    "react-hook-form": "^7.45.1"
   }
 }
