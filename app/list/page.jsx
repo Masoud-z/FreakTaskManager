@@ -1,7 +1,11 @@
 import TasksList from "@/components/tasksList/TasksList";
 
 function taskList() {
-  return <TasksList />;
+  return (
+    <>
+      <TasksList />{" "}
+    </>
+  );
 }
 
 export default taskList;

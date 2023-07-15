@@ -1,7 +1,11 @@
 import SignIn from "@/components/signIn/SignIn";
 
 function signin() {
-  return <SignIn />;
+  return (
+    <>
+      <SignIn />
+    </>
+  );
 }
 
 export default signin;
