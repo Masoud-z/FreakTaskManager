@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@700&display=swap");
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  transition: 0.3s linear;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Change the color of text, border and size of Material UI Buttons */
+.LayouutStyle_dark___hyrn .MuiOutlinedInput-notchedOutline,
+.LayouutStyle_dark___hyrn .MuiButtonBase-root {
+  color: white;
+  border-color: #f1f1f1;
+}
+
+.LayouutStyle_light__haqMN .MuiOutlinedInput-notchedOutline,
+.LayouutStyle_light__haqMN .MuiButtonBase-root {
+  border-color: #222;
+  color: #222;
+}
+
+.MuiButtonBase-root:hover {
+  color: #1976d2 !important;
+  border-color: #1976d2 !important;
+}
+
+.MuiButtonBase-root {
+  height: 36px;
+}
+
+/* ----------------------++++---------------------- */
+
+/* Change the color of label of TextFields of Material UI */
+.LayouutStyle_dark___hyrn .MuiFormLabel-root {
+  color: white;
+}
+
+.LayouutStyle_light__haqMN .MuiFormLabel-root {
+  color: black;
+}
+
+.Mui-focused {
+  color: #1976d2 !important;
+}
+/* ----------------------++++---------------------- */
+
+/* Change the size of label of TextFields of Material UI */
+.MuiTextField-root {
+  width: 400px !important;
+}
+/* ----------------------++++---------------------- */
+
+/* Change the color of icons of Material UI */
+.LayouutStyle_dark___hyrn .MuiSvgIcon-root,
+.LayouutStyle_dark___hyrn .MuiInputBase-input {
+  color: white;
+}
+
+.LayouutStyle_light__haqMN .MuiSvgIcon-root,
+.LayouutStyle_light__haqMN .MuiInputBase-input {
+  color: black;
+}
+/* ----------------------++++---------------------- */
+
+/* Change the color of error of Material UI */
+.Mui-error {
+  border-color: #d32f2f !important;
+  color: #d32f2f !important;
+}
+/* ----------------------++++---------------------- */
+
+/* Change the size of progress circle of Material UI */
+.MuiCircularProgress-root {
+  width: 20px !important;
+  height: 20px !important;
+}
+/* ----------------------++++---------------------- */
+
+/* Change the transition of pop up of Autocomplete of Material UI */
+.MuiAutocomplete-popper {
+  transition: none !important;
+}
+/* ----------------------++++---------------------- */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backBtn {
+  color: unset;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.backBtn:hover {
+  background-color: #888;
+  cursor: pointer;
+}
+
+/* inputs row container */
+.inputs {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.btn {
+  width: 225px;
+  margin: 0 10px !important;
+}
+
+.container {
+  margin: 25px 15px;
+  padding: 20px 10px;
+  border-radius: 10px;
+  min-height: 50vh;
+}
+
+.darkShadow {
+  box-shadow: 1px 1px 2px rgba(250, 250, 250, 0.3);
+}
+
+.lightShadow {
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
