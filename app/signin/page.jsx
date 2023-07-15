@@ -1,7 +1,7 @@
 import SignIn from "@/components/signIn/SignIn";
 
-function page() {
+function signin() {
   return <SignIn />;
 }
 
-export default page;
+export default signin;

@@ -1,7 +1,7 @@
 import TasksList from "@/components/tasksList/TasksList";
 
-function page() {
+function taskList() {
   return <TasksList />;
 }
 
-export default page;
+export default taskList;
