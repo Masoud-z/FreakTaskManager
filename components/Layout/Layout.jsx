@@ -17,7 +17,7 @@ import { Dark, Msg, logStatus } from "@/helper/Contexts";
 import styles from "./LayouutStyle.module.css";
 import { auth } from "@/config/firebase";
 
-export default function Layout(props) {
+export default function Layout({ children }) {
   const router = useRouter();
   const { loggedIn, setLoggedIn } = useContext(logStatus);
   const { darkMode, setDarkMode } = useContext(Dark);
@@ -94,7 +94,7 @@ export default function Layout(props) {
           </div>
         </div>
       </header>
-      <main>{props.children}</main>
+      <main>{children}</main>
       {/* Showing message to the user */}
       <Snackbar
         anchorOrigin={{
