@@ -38,7 +38,7 @@ export default function SignIn() {
 
   const success = () => {
     setLoading(false);
-    route.push("/");
+    route.push("/list");
     setMsg({
       open: true,
       message: "You logged in",
