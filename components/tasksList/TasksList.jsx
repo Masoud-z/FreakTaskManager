@@ -19,7 +19,7 @@ import { ReactSortable } from "react-sortablejs";
 import { Msg, logStatus, Dark } from "@/helper/Contexts";
 
 import styles from "./TasksList.module.css";
-// import NewTaskDialog from "./NewTaskDialog";
+import NewTaskDialog from "./NewTaskDialog";
 
 export default function TasksList() {
   const route = useRouter();
@@ -157,11 +157,11 @@ export default function TasksList() {
     <div className={`container ${darkMode ? "darkShadow" : "lightShadow"}`}>
       <div className="header">
         <h1>Tasks List</h1>
-        {/* <NewTaskDialog
+        <NewTaskDialog
           max={maxOrder}
           getList={getList}
           setLoading={setLoading}
-        /> */}
+        />
         <div onClick={route.back} className="backBtn">
           Back
         </div>
