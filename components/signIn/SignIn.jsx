@@ -1,3 +1,4 @@
+"use client";
 import { useState, useContext, useEffect } from "react";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useForm } from "react-hook-form";
