@@ -1,9 +1,11 @@
 .container {
   height: 90vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  gap: 10vw;
+  gap: 5vh;
+  text-align: center;
 }
 
 .container h1 {

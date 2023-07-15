@@ -9,24 +9,24 @@ export default function LandingPage() {
   const { loggedIn } = useContext(logStatus);
   return (
     <div className={styles.container}>
-      <div>
-        <h1>
-          Generate Brackets
-          <br />
-          for All your Tournaments
-        </h1>
+      <h1>
+        Manage All Your Tasks
+        <br />
+        Within a Blink
+      </h1>
+      <div className={styles.btnContainer}>
         {!loggedIn && (
-          <div className={styles.btnContainer}>
-            <Link href="/signup" className={styles.btn}>
-              Sign Up
-            </Link>
-            <Link href="/signin" className={styles.btn}>
-              Sign In
-            </Link>
-          </div>
+          <Link href="/signup" className={styles.btn}>
+            Sign Up
+          </Link>
+        )}
+        <Image src="/tasks.png" alt="globe" width="300" height="300" />
+        {!loggedIn && (
+          <Link href="/signin" className={styles.btn}>
+            Sign In
+          </Link>
         )}
       </div>
-      <Image src="/Tournament.png" alt="globe" width="300" height="300" />
     </div>
   );
 }
