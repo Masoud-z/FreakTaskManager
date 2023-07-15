@@ -89,6 +89,10 @@ html {
 }
 /* ----------------------++++---------------------- */
 
+.MuiGrid-root {
+  margin-left: 0 !important;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
