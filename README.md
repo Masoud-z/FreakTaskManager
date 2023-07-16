@@ -2,7 +2,7 @@
 
 Manage your tasks like a Freak!
 </br>
-:globe_with_meridians: Live: https://tournament-bracket-generator-masoud-z.vercel.app/
+:globe_with_meridians: Live: https://tasks-three-sigma.vercel.app/
 </br></br>
 Using Next.js and Material-UI with JavaScript.
 <div align="center">
